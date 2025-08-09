@@ -787,8 +787,28 @@
         let editingMemberId = null;
         let deletingMemberId = null;
 
+        // 데이터 저장 및 로드 함수
+        function saveData() {
+            localStorage.setItem('familyMembers', JSON.stringify(familyMembers));
+            localStorage.setItem('recentActivities', JSON.stringify(recentActivities));
+        }
+
+        function loadData() {
+            const savedMembers = localStorage.getItem('familyMembers');
+            const savedActivities = localStorage.getItem('recentActivities');
+            
+            if (savedMembers) {
+                familyMembers = JSON.parse(savedMembers);
+            }
+            
+            if (savedActivities) {
+                recentActivities = JSON.parse(savedActivities);
+            }
+        }
+
         // 페이지 로드 시 초기화
         document.addEventListener('DOMContentLoaded', function() {
+            loadData(); // 저장된 데이터 로드
             renderFamilyMembers();
             renderRecentActivities();
             updateStats();
@@ -892,6 +912,7 @@
                 
                 // UI 다시 렌더링
                 renderFamilyMembers();
+                saveData(); // 데이터 저장
                 addActivity(`가족 구성원 순서가 변경되었습니다`, "🔄");
             }
             
@@ -1025,10 +1046,11 @@
         function confirmDelete() {
             if (deletingMemberId) {
                 familyMembers = familyMembers.filter(m => m.id !== deletingMemberId);
-                renderFamilyMembers();
-                updateStats();
-                addActivity(`가족 구성원이 삭제되었습니다`, "🗑️");
-                closeDeleteModal();
+                            renderFamilyMembers();
+            updateStats();
+            saveData(); // 데이터 저장
+            addActivity(`가족 구성원이 삭제되었습니다`, "🗑️");
+            closeDeleteModal();
             }
         }
 
@@ -1053,6 +1075,7 @@
             }
             
             renderRecentActivities();
+            saveData(); // 데이터 저장
         }
 
         // 폼 제출 처리
@@ -1086,6 +1109,7 @@
 
             renderFamilyMembers();
             updateStats();
+            saveData(); // 데이터 저장
             closeModal();
         });
 
