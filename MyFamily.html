@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리가족 - LIM'S Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .home-link {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .home-link:hover {
+            color: #ee5a24;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            color: #718096;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .main-dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .study-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+        }
+
+        .study-btn:hover {
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+        }
+
+        .family-overview {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .overview-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .add-member-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+        }
+
+        .add-member-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .family-member {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s ease;
+            position: relative;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .family-member:hover {
+            transform: translateY(-3px);
+        }
+
+        .family-member.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+            cursor: grabbing;
+        }
+
+        .family-member.drag-over {
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+            border-color: #667eea;
+        }
+
+        .color-option.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+        }
+
+        .drag-handle {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            cursor: grab;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .family-member:hover .drag-handle {
+            opacity: 1;
+        }
+
+        .member-actions {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            display: flex;
+            gap: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .family-member:hover .member-actions {
+            opacity: 1;
+        }
+
+        .member-action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .member-action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+
+
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-status {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .recent-activity {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .main-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .family-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="home-link">← 홈으로 돌아가기</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">우리가족</h1>
+        
+        <div class="welcome-section">
+            <h2 class="welcome-title">🎉 오늘도 화이팅!</h2>
+            <p class="welcome-subtitle">가족 구성원들의 할일과 공부시간을 체계적으로 관리해보세요</p>
+        </div>
+
+        <div class="main-dashboard">
+            <div class="dashboard-card">
+                <h3 class="card-title">
+                    <span class="card-icon">📋</span>
+                    할일 관리
+                </h3>
+                <div class="quick-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">오늘 할일</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">완료됨</div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="#" class="action-btn">할일 추가하기</a>
+                    <a href="#" class="action-btn">할일 목록 보기</a>
+                    <a href="#" class="action-btn">진행 상황 확인</a>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3 class="card-title">
+                    <span class="card-icon">📚</span>
+                    공부시간 체크
+                </h3>
+                <div class="quick-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">2.5h</div>
+                        <div class="stat-label">오늘 공부</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">과목</div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="#" class="action-btn study-btn">공부 시작하기</a>
+                    <a href="#" class="action-btn study-btn">공부 기록 보기</a>
+                    <a href="#" class="action-btn study-btn">통계 확인하기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="family-overview">
+            <h3 class="overview-title">
+                👨‍👩‍👧‍👦 가족 구성원 현황
+                <button class="add-member-btn" onclick="openAddMemberModal()">+ 구성원 추가</button>
+            </h3>
+            <div class="family-grid" id="familyGrid">
+                <!-- 가족 구성원들이 동적으로 생성됩니다 -->
+            </div>
+        </div>
+
+        <div class="recent-activity">
+            <h3 class="activity-title">
+                <span class="card-icon">⚡</span>
+                최근 활동
+            </h3>
+            <ul class="activity-list" id="activityList">
+                <!-- 활동 내역이 동적으로 생성됩니다 -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- 가족 구성원 추가/수정 모달 -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title" id="modalTitle">가족 구성원 추가</h2>
+            
+            <form id="memberForm">
+                <div class="form-group">
+                    <label for="memberName" class="form-label">이름 *</label>
+                    <input type="text" id="memberName" class="form-input" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="memberRole" class="form-label">역할 *</label>
+                        <select id="memberRole" class="form-select" required>
+                            <option value="">역할 선택</option>
+                            <option value="부모">부모</option>
+                            <option value="자녀">자녀</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">카드 색상</label>
+                        <div class="color-picker" id="colorPicker">
+                            <!-- 색상 옵션들이 동적으로 생성됩니다 -->
+                        </div>
+                        <input type="hidden" id="selectedColorIndex" value="0">
+                    </div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">취소</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 삭제 확인 모달 -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">구성원 삭제 확인</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #4a5568;">
+                <strong id="deleteMemberName"></strong>을(를) 정말로 삭제하시겠습니까?<br>
+                이 작업은 되돌릴 수 없습니다.
+            </p>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">취소</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">삭제</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 색상 팔레트 정의
+        const colorPalette = [
+            { name: '핑크', gradient: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)' },
+            { name: '파랑', gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
+            { name: '초록', gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' },
+            { name: '보라', gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)' },
+            { name: '주황', gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)' },
+            { name: '청록', gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)' },
+            { name: '노랑', gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' },
+            { name: '빨강', gradient: 'linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)' }
+        ];
+
+        // 가족 구성원 데이터
+        let familyMembers = [
+            {
+                id: 1,
+                name: "아빠",
+                role: "부모",
+                tasks: 3,
+                studyTime: 0,
+                colorIndex: 0
+            },
+            {
+                id: 2,
+                name: "엄마",
+                role: "부모",
+                tasks: 4,
+                studyTime: 0.5,
+                colorIndex: 1
+            },
+            {
+                id: 3,
+                name: "세아",
+                role: "자녀",
+                tasks: 2,
+                studyTime: 1.5,
+                colorIndex: 2
+            },
+            {
+                id: 4,
+                name: "윤아",
+                role: "자녀",
+                tasks: 3,
+                studyTime: 0.5,
+                colorIndex: 3
+            },
+            {
+                id: 5,
+                name: "주아",
+                role: "자녀",
+                tasks: 3,
+                studyTime: 0.5,
+                colorIndex: 4
+            }
+        ];
+
+        // 활동 내역 데이터
+        let recentActivities = [
+            {
+                id: 1,
+                icon: "✅",
+                text: "윤아가 '방 청소하기' 할일을 완료했습니다",
+                time: "10분 전"
+            },
+            {
+                id: 2,
+                icon: "📚",
+                text: "세아가 수학 공부를 1시간 완료했습니다",
+                time: "30분 전"
+            },
+            {
+                id: 3,
+                icon: "🆕",
+                text: "엄마가 '장보기' 할일을 새로 등록했습니다",
+                time: "1시간 전"
+            },
+            {
+                id: 4,
+                icon: "🎯",
+                text: "아빠가 주간 목표를 달성했습니다! 🎉",
+                time: "2시간 전"
+            }
+        ];
+
+        // 모달 상태
+        let isEditMode = false;
+        let editingMemberId = null;
+        let deletingMemberId = null;
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFamilyMembers();
+            renderRecentActivities();
+            updateStats();
+            renderColorPicker();
+        });
+
+        // 색상 선택기 렌더링
+        function renderColorPicker() {
+            const colorPicker = document.getElementById('colorPicker');
+            colorPicker.innerHTML = '';
+            
+            colorPalette.forEach((color, index) => {
+                const colorOption = document.createElement('div');
+                colorOption.className = 'color-option';
+                colorOption.style.background = color.gradient;
+                colorOption.dataset.colorIndex = index;
+                colorOption.title = color.name;
+                
+                colorOption.addEventListener('click', function() {
+                    // 기존 선택 해제
+                    document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                    // 현재 선택
+                    this.classList.add('selected');
+                    document.getElementById('selectedColorIndex').value = index;
+                });
+                
+                colorPicker.appendChild(colorOption);
+            });
+        }
+
+        // 사용되지 않는 색상 인덱스 찾기
+        function getAvailableColorIndex() {
+            const usedColors = familyMembers.map(member => member.colorIndex);
+            for (let i = 0; i < colorPalette.length; i++) {
+                if (!usedColors.includes(i)) {
+                    return i;
+                }
+            }
+            // 모든 색상이 사용 중이면 첫 번째 색상 반환
+            return 0;
+        }
+
+        // 드래그 앤 드롭 설정
+        function setupDragAndDrop(memberCard) {
+            memberCard.draggable = true;
+            
+            memberCard.addEventListener('dragstart', handleDragStart);
+            memberCard.addEventListener('dragend', handleDragEnd);
+            memberCard.addEventListener('dragover', handleDragOver);
+            memberCard.addEventListener('drop', handleDrop);
+            memberCard.addEventListener('dragenter', handleDragEnter);
+            memberCard.addEventListener('dragleave', handleDragLeave);
+        }
+
+        // 드래그 시작
+        function handleDragStart(e) {
+            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', e.target.dataset.memberId);
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        // 드래그 종료
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        // 드래그 오버
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        // 드래그 엔터
+        function handleDragEnter(e) {
+            e.preventDefault();
+            if (e.target.closest('.family-member') && !e.target.closest('.family-member').classList.contains('dragging')) {
+                e.target.closest('.family-member').classList.add('drag-over');
+            }
+        }
+
+        // 드래그 리브
+        function handleDragLeave(e) {
+            if (e.target.closest('.family-member')) {
+                e.target.closest('.family-member').classList.remove('drag-over');
+            }
+        }
+
+        // 드롭
+        function handleDrop(e) {
+            e.preventDefault();
+            const draggedId = parseInt(e.dataTransfer.getData('text/plain'));
+            const dropTarget = e.target.closest('.family-member');
+            
+            if (dropTarget && draggedId !== parseInt(dropTarget.dataset.memberId)) {
+                const draggedIndex = familyMembers.findIndex(member => member.id === draggedId);
+                const dropIndex = parseInt(dropTarget.dataset.index);
+                
+                // 배열에서 순서 변경
+                const [draggedMember] = familyMembers.splice(draggedIndex, 1);
+                familyMembers.splice(dropIndex, 0, draggedMember);
+                
+                // UI 다시 렌더링
+                renderFamilyMembers();
+                addActivity(`가족 구성원 순서가 변경되었습니다`, "🔄");
+            }
+            
+            // 드래그 오버 스타일 제거
+            document.querySelectorAll('.family-member').forEach(card => {
+                card.classList.remove('drag-over');
+            });
+        }
+
+        // 가족 구성원 렌더링
+        function renderFamilyMembers() {
+            const familyGrid = document.getElementById('familyGrid');
+            familyGrid.innerHTML = '';
+
+            familyMembers.forEach((member, index) => {
+                const memberCard = document.createElement('div');
+                memberCard.className = 'family-member';
+                memberCard.dataset.memberId = member.id;
+                memberCard.dataset.index = index;
+                memberCard.style.background = colorPalette[member.colorIndex].gradient;
+                
+                memberCard.innerHTML = `
+                    <div class="drag-handle" title="드래그하여 순서 변경">⋮⋮</div>
+                    <div class="member-actions">
+                        <button class="member-action-btn" onclick="editMember(${member.id})" title="수정">✏️</button>
+                        <button class="member-action-btn" onclick="deleteMember(${member.id})" title="삭제">🗑️</button>
+                    </div>
+                    <div class="member-name">${member.name}</div>
+                    <div class="member-status">할일 ${member.tasks}개 • 공부 ${member.studyTime}h</div>
+                `;
+                
+                // 드래그 이벤트 추가
+                setupDragAndDrop(memberCard);
+                
+                familyGrid.appendChild(memberCard);
+            });
+        }
+
+        // 최근 활동 렌더링
+        function renderRecentActivities() {
+            const activityList = document.getElementById('activityList');
+            activityList.innerHTML = '';
+
+            recentActivities.forEach(activity => {
+                const activityItem = document.createElement('li');
+                activityItem.className = 'activity-item';
+                activityItem.innerHTML = `
+                    <div class="activity-icon">${activity.icon}</div>
+                    <div class="activity-content">
+                        <div class="activity-text">${activity.text}</div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                `;
+                activityList.appendChild(activityItem);
+            });
+        }
+
+        // 통계 업데이트
+        function updateStats() {
+            const totalTasks = familyMembers.reduce((sum, member) => sum + member.tasks, 0);
+            const totalStudyTime = familyMembers.reduce((sum, member) => sum + member.studyTime, 0);
+            
+            // 통계 업데이트 로직을 여기에 추가할 수 있습니다
+        }
+
+        // 모달 열기
+        function openAddMemberModal() {
+            isEditMode = false;
+            editingMemberId = null;
+            document.getElementById('modalTitle').textContent = '가족 구성원 추가';
+            document.getElementById('submitBtn').textContent = '저장';
+            document.getElementById('memberForm').reset();
+            
+            // 사용 가능한 색상 선택
+            const availableColorIndex = getAvailableColorIndex();
+            document.getElementById('selectedColorIndex').value = availableColorIndex;
+            
+            // 색상 선택기 초기화
+            document.querySelectorAll('.color-option').forEach((opt, index) => {
+                opt.classList.remove('selected');
+                if (index === availableColorIndex) {
+                    opt.classList.add('selected');
+                }
+            });
+            
+            document.getElementById('memberModal').style.display = 'block';
+        }
+
+        // 모달 닫기
+        function closeModal() {
+            document.getElementById('memberModal').style.display = 'none';
+        }
+
+        // 구성원 수정
+        function editMember(memberId) {
+            const member = familyMembers.find(m => m.id === memberId);
+            if (!member) return;
+
+            isEditMode = true;
+            editingMemberId = memberId;
+            document.getElementById('modalTitle').textContent = '가족 구성원 수정';
+            document.getElementById('submitBtn').textContent = '수정';
+
+            // 폼에 기존 데이터 채우기
+            document.getElementById('memberName').value = member.name;
+            document.getElementById('memberRole').value = member.role;
+            document.getElementById('selectedColorIndex').value = member.colorIndex;
+
+            // 색상 선택기 초기화
+            document.querySelectorAll('.color-option').forEach((opt, index) => {
+                opt.classList.remove('selected');
+                if (index === member.colorIndex) {
+                    opt.classList.add('selected');
+                }
+            });
+
+            document.getElementById('memberModal').style.display = 'block';
+        }
+
+        // 구성원 삭제
+        function deleteMember(memberId) {
+            const member = familyMembers.find(m => m.id === memberId);
+            if (!member) return;
+
+            deletingMemberId = memberId;
+            document.getElementById('deleteMemberName').textContent = member.name;
+            document.getElementById('deleteModal').style.display = 'block';
+        }
+
+        // 삭제 확인
+        function confirmDelete() {
+            if (deletingMemberId) {
+                familyMembers = familyMembers.filter(m => m.id !== deletingMemberId);
+                renderFamilyMembers();
+                updateStats();
+                addActivity(`가족 구성원이 삭제되었습니다`, "🗑️");
+                closeDeleteModal();
+            }
+        }
+
+        // 삭제 모달 닫기
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            deletingMemberId = null;
+        }
+
+        // 활동 내역 추가
+        function addActivity(text, icon = "📝") {
+            const newActivity = {
+                id: Date.now(),
+                icon: icon,
+                text: text,
+                time: "방금 전"
+            };
+            
+            recentActivities.unshift(newActivity);
+            if (recentActivities.length > 10) {
+                recentActivities = recentActivities.slice(0, 10);
+            }
+            
+            renderRecentActivities();
+        }
+
+        // 폼 제출 처리
+        document.getElementById('memberForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('memberName').value,
+                role: document.getElementById('memberRole').value,
+                tasks: 0,
+                studyTime: 0,
+                colorIndex: parseInt(document.getElementById('selectedColorIndex').value)
+            };
+
+            if (isEditMode) {
+                // 수정 모드
+                const memberIndex = familyMembers.findIndex(m => m.id === editingMemberId);
+                if (memberIndex !== -1) {
+                    familyMembers[memberIndex] = { ...familyMembers[memberIndex], ...formData };
+                    addActivity(`${formData.name}의 정보가 수정되었습니다`, "✏️");
+                }
+            } else {
+                // 추가 모드
+                const newMember = {
+                    ...formData,
+                    id: Date.now()
+                };
+                familyMembers.push(newMember);
+                addActivity(`새로운 가족 구성원 ${formData.name}이(가) 추가되었습니다`, "🆕");
+            }
+
+            renderFamilyMembers();
+            updateStats();
+            closeModal();
+        });
+
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const memberModal = document.getElementById('memberModal');
+            const deleteModal = document.getElementById('deleteModal');
+            
+            if (event.target === memberModal) {
+                closeModal();
+            }
+            if (event.target === deleteModal) {
+                closeDeleteModal();
+            }
+        }
+
+
+    </script>
+</body>
+</html>

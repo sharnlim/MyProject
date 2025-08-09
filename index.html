@@ -106,6 +106,50 @@
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
 
+        .family-link {
+            margin-top: 2rem;
+        }
+
+        .family-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .family-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .meeting-link {
+            margin-top: 1rem;
+        }
+
+        .meeting-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+        }
+
+        .meeting-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+        }
+
         .footer {
             margin-top: 2rem;
             color: #a0aec0;
@@ -130,50 +174,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎉 프로젝트에 오신 것을 환영합니다!</h1>
+        <h1>LIM'S Home</h1>
         <p class="subtitle">
-            이 프로젝트는 현대적인 웹 기술을 활용하여 만들어졌습니다.
-            아름다운 UI와 반응형 디자인을 경험해보세요.
+            여기는 임씨네 홈페이지입니다. 
         </p>
         
-        <div class="features">
-            <div class="feature">
-                <h3>🚀 빠른 성능</h3>
-                <p>최적화된 코드로 빠른 로딩 속도를 제공합니다</p>
-            </div>
-            <div class="feature">
-                <h3>📱 반응형 디자인</h3>
-                <p>모든 디바이스에서 완벽하게 작동합니다</p>
-            </div>
-            <div class="feature">
-                <h3>🎨 현대적인 UI</h3>
-                <p>아름답고 직관적인 사용자 인터페이스</p>
-            </div>
+        <div class="family-link">
+            <a href="MyFamily.html" class="family-button">우리가족</a>
         </div>
         
-        <button class="cta-button" onclick="showMessage()">
-            시작하기
-        </button>
-        
-        <div class="footer">
-            <p>Made with ❤️ for your amazing project</p>
+        <div class="meeting-link">
+            <a href="Family_Meeting.html" class="meeting-button">가족회의</a>
         </div>
     </div>
-
-    <script>
-        function showMessage() {
-            alert('프로젝트가 성공적으로 시작되었습니다! 🎉');
-        }
-
-        // 페이지 로드 시 애니메이션 효과
-        document.addEventListener('DOMContentLoaded', function() {
-            const features = document.querySelectorAll('.feature');
-            features.forEach((feature, index) => {
-                feature.style.animationDelay = `${index * 0.2}s`;
-                feature.style.animation = 'fadeInUp 0.8s ease-out forwards';
-                feature.style.opacity = '0';
-            });
-        });
-    </script>
 </body>
 </html> 
